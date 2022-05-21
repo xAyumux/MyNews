@@ -1,10 +1,11 @@
 import React from "react";
+import Sidebar from './Sidebar';
 
 export const Main = (props) => {
 	const user = props.user;
 	return (
 		<div>
-			<div>Mainページ</div>
+			<Sidebar />
 		</div>
 	);
 };
