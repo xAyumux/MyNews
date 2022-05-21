@@ -1,4 +1,6 @@
 import * as React from "react";
+import axios from "axios";
+
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,12 +17,30 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
+import { Articles } from "./Articles";
+
 const drawerWidth = 200;
 
-export default function Sidebar(props) {
+export default function Sidebar() {
 	const [open, setOpen] = React.useState(false);
 	const [keyword, setKeyword] = React.useState();
 	const [keywords, setKeywords] = React.useState([]);
+	const [articles, setArticles] = React.useState();
+
+	// axiosを用いてapiを叩く。postメソッド
+	const url = "https://mynews-backend-0521.herokuapp.com/articles/yahoonews";
+
+	React.useEffect(() => {
+		axios
+			// .post(url, {
+			// 	keywords: keywords,
+			// })
+			.get(url)
+			.then((res) => {
+				// console.log(Object.entries(res.data)[1][1]);
+				setArticles(Object.entries(res.data));
+			});
+	}, [keywords]);
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -87,7 +107,13 @@ export default function Sidebar(props) {
 					</List>
 				</Box>
 			</Drawer>
-			{props.contents}
+			{articles ? (
+				articles.map((article) => {
+					return <Articles article={article[1]} />;
+				})
+			) : (
+				<div></div>
+			)}
 		</Box>
 	);
 }
