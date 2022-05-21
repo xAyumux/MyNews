@@ -1,6 +1,6 @@
 import React from "react";
 import firebase from "./firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Header = (props) => {
 	const user = props.user;
@@ -21,7 +21,7 @@ export const Header = (props) => {
 	return (
 		<div>
 			<div>Headerだよ</div>
-			{user ? <button onClick={GoogleLogout}>LogOut</button> : <button onClick={GoogleLogin}>LogIn</button>}
+            {user ? <button onClick={GoogleLogout}>LogOut</button> : <button onClick={GoogleLogin}>LogIn</button>}
 		</div>
 	);
 };

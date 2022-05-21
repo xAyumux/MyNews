@@ -4,6 +4,7 @@ import firebase from "./firebase";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Header } from "./Header";
 import { Main } from "./Main/Main";
+import { TopPage } from "./TopPage/TopPage";
 
 export const Routers = () => {
 	const [user, setUser] = React.useState();
@@ -21,7 +22,7 @@ export const Routers = () => {
 				<Header user={user} />
 			</div>
 			<Routes>
-				<Route path="/" element={<Main user={user} />}></Route>
+				<Route path="/" element={user ? <Main user={user} /> : <TopPage />}></Route>
 			</Routes>
 		</BrowserRouter>
 	);
