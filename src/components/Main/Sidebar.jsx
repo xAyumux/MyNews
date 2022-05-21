@@ -10,7 +10,6 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const drawerWidth = 240;
 
@@ -18,18 +17,6 @@ export default function PermanentDrawerLeft() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            MyNews
-          </Typography>
-          <div style={{ flexGrow: 1 }}></div>
-          <AccountCircleIcon 
-          />
-        </Toolbar>
-      </AppBar>
       <Drawer
         variant="permanent"
         sx={{
@@ -45,10 +32,14 @@ export default function PermanentDrawerLeft() {
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemText primary={text} />
-                <Divider />
               </ListItemButton>
             </ListItem>
           ))}
+            <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemText primary="Add Keyword" />
+                </ListItemButton>
+            </ListItem>
         </List>
         </Box>
       </Drawer>

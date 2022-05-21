@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Header } from "./Header";
 import { Main } from "./Main/Main";
 import { TopPage } from "./TopPage/TopPage";
+import { Test } from "./API_test/Test";
 
 export const Routers = () => {
 	const [user, setUser] = React.useState();
@@ -23,6 +24,7 @@ export const Routers = () => {
 			</div>
 			<Routes>
 				<Route path="/" element={user ? <Main user={user} /> : <TopPage />}></Route>
+				{/* <Route path="/" element={<Test />}></Route> */}
 			</Routes>
 		</BrowserRouter>
 	);
