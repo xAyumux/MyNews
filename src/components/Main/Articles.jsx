@@ -5,7 +5,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-export default function Articles() {
+export default function Articles(props) {
+  const article = props.article;
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
