@@ -21,7 +21,7 @@ export const Header = (props) => {
 	return (
 		<div>
 			<div>Headerだよ</div>
-			{user ? <button onClick={GoogleLogout}>LogOut</button> : <div onClick={GoogleLogin}>LogIn</div>}
+			{user ? <button onClick={GoogleLogout}>LogOut</button> : <button onClick={GoogleLogin}>LogIn</button>}
 		</div>
 	);
 };
