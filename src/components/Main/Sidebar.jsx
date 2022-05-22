@@ -55,6 +55,9 @@ export default function Sidebar() {
 		setOpen(false);
 		setKeywords([...keywords, keyword]);
 	};
+	const handleClose2 = () => {
+		setOpen(false);
+	};
 
 	return (
 		<Box sx={{ display: "flex" }}>
@@ -99,7 +102,7 @@ export default function Sidebar() {
 									/>
 								</DialogContent>
 								<DialogActions>
-									<Button onClick={handleClose}>Cancel</Button>
+									<Button onClick={handleClose2}>Cancel</Button>
 									<Button onClick={handleClose}>Subscribe</Button>
 								</DialogActions>
 							</Dialog>
