@@ -1,6 +1,6 @@
 import * as React from "react";
 import axios from "axios";
-
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -16,6 +16,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import ClearIcon from '@mui/icons-material/Clear';
+import IconButton from '@mui/material/IconButton';
 
 import { Articles } from "./Articles";
 
@@ -78,6 +80,10 @@ export default function Sidebar() {
 								<ListItemButton>
 									<ListItemText primary={text} />
 								</ListItemButton>
+								{/* ここから削除ボタン */}
+							<IconButton aria-label="delete" size="small">
+									<ClearIcon fontSize="inherit" />
+								</IconButton>
 							</ListItem>
 						))}
 						<ListItem disablePadding>
@@ -98,18 +104,24 @@ export default function Sidebar() {
 										label="new keyword"
 										type="keyword"
 										fullWidth
+										required
 										variant="standard"
 									/>
 								</DialogContent>
 								<DialogActions>
 									<Button onClick={handleClose2}>Cancel</Button>
-									<Button onClick={handleClose}>Subscribe</Button>
+									<Button onClick={handleClose}>Add</Button>
 								</DialogActions>
 							</Dialog>
 						</ListItem>
 					</List>
 				</Box>
 			</Drawer>
+			<Grid container
+			sx={{
+				borderRadius: 1,
+				flexWrap: 'wrap',
+				}}>
 			{articles ? (
 				articles.map((article) => {
 					return <Articles article={article[1]} />;
@@ -117,6 +129,7 @@ export default function Sidebar() {
 			) : (
 				<div></div>
 			)}
+			</Grid>
 		</Box>
 	);
 }
