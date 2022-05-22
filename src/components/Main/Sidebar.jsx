@@ -16,10 +16,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import ClearIcon from '@mui/icons-material/Clear';
-import IconButton from '@mui/material/IconButton';
+import ClearIcon from "@mui/icons-material/Clear";
+import IconButton from "@mui/material/IconButton";
 
 import { Articles } from "./Articles";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 const drawerWidth = 200;
 
@@ -62,6 +63,19 @@ export default function Sidebar() {
 		setOpen(false);
 	};
 
+	const handleDelete = (index) => {
+		// console.log(index);
+		// const NewArray = keywords.splice(index, 1);
+		setKeywords((keywords) => {
+			if (keywords.length === 1) {
+				setKeywords([]);
+			} else {
+				// console.log("hello");
+				setKeywords(keywords.splice(index, 1));
+			}
+		});
+	};
+
 	return (
 		<Box sx={{ display: "flex" }}>
 			<CssBaseline />
@@ -76,17 +90,21 @@ export default function Sidebar() {
 				<Toolbar />
 				<Box sx={{ overflow: "auto" }}>
 					<List>
-						{keywords.map((text, index) => (
-							<ListItem key={text} disablePadding>
-								<ListItemButton>
-									<ListItemText primary={text} />
-								</ListItemButton>
-								{/* ここから削除ボタン */}
-							<IconButton aria-label="delete" size="small">
-									<ClearIcon fontSize="inherit" />
-								</IconButton>
-							</ListItem>
-						))}
+						{keywords ? (
+							keywords.map((text, index) => (
+								<ListItem key={text} disablePadding>
+									<ListItemButton>
+										<ListItemText primary={text} />
+									</ListItemButton>
+									{/* ここから削除ボタン */}
+									<IconButton aria-label="delete" size="small" onClick={() => handleDelete(index)}>
+										<ClearIcon fontSize="inherit" />
+									</IconButton>
+								</ListItem>
+							))
+						) : (
+							<div></div>
+						)}
 						<ListItem disablePadding>
 							<ListItemButton onClick={handleClickOpen}>
 								<ListItemText primary="Add Keyword" />
@@ -118,22 +136,24 @@ export default function Sidebar() {
 					</List>
 				</Box>
 			</Drawer>
-			<Grid container
-			sx={{
-				borderRadius: 1,
-				flexWrap: 'wrap',
-				}}>
-			{articles ? (
-				articles.length ? (
-					articles.map((article) => {
-						return <Articles article={article[1]} />;
-					})
+			<Grid
+				container
+				sx={{
+					borderRadius: 1,
+					flexWrap: "wrap",
+				}}
+			>
+				{articles ? (
+					articles.length ? (
+						articles.map((article) => {
+							return <Articles article={article[1]} />;
+						})
+					) : (
+						<h1>キーワードに当てはまる記事が見つかりませんでした</h1>
+					)
 				) : (
-					<h1>キーワードに当てはまる記事が見つかりませんでした</h1>
-				)
-			) : (
-				<h1>キーワードを入力してください</h1>
-			)}
+					<h1>キーワードを入力してください</h1>
+				)}
 			</Grid>
 		</Box>
 	);
