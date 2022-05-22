@@ -30,16 +30,17 @@ export default function Sidebar() {
 	const [articles, setArticles] = React.useState();
 
 	// axiosを用いてapiを叩く。postメソッド
-	const url = "https://mynews-backend-0521.herokuapp.com/articles/yahoonews";
+	const url = "https://mynews-backend-0521.herokuapp.com/articles/keywords";
 
 	React.useEffect(() => {
 		axios
-			// .post(url, {
-			// 	keywords: keywords,
-			// })
-			.get(url)
+			.post(url, {
+				keywords: keywords,
+			})
 			.then((res) => {
 				// console.log(Object.entries(res.data)[1][1]);
+				// console.log(res.data === new Object({}));
+				console.log(Object.entries(res.data).length);
 				setArticles(Object.entries(res.data));
 			});
 	}, [keywords]);
@@ -123,11 +124,15 @@ export default function Sidebar() {
 				flexWrap: 'wrap',
 				}}>
 			{articles ? (
-				articles.map((article) => {
-					return <Articles article={article[1]} />;
-				})
+				articles.length ? (
+					articles.map((article) => {
+						return <Articles article={article[1]} />;
+					})
+				) : (
+					<h1>キーワードに当てはまる記事が見つかりませんでした</h1>
+				)
 			) : (
-				<div></div>
+				<h1>キーワードを入力してください</h1>
 			)}
 			</Grid>
 		</Box>
